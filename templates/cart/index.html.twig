@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Your Bill</h1>
+        {% if cart.items.count > 0 %}
+            <div class="row mt-4">
+                <div class="col-1">
+                </div>
+                <div class="col-md-10 w-100">
+                    {{ form_start(form) }}
+                    <div class="card card-block d-flex">
+                        <div class="card-header bg-dark text-white d-flex">
+                            <h5>Items</h5>
+                            <div class="ml-auto">
+                                {{ form_widget(form.save, {'attr': {'class': 'btn btn-secondary text-white'}}) }}
+                                {{ form_widget(form.clear, {'attr': {'class': 'btn btn-light'}}) }}
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% for item in form.items %}
+                                <li class="list-group-item d-flex">
+                                    <div class="flex-fill mr-2 mt-4">
+                                        <img src="https://via.placeholder.com/200x150" width="64" alt="Product image">
+                                    </div>
+                                    <div class="flex-fill mr-2">
+                                        <h5 class="mt-0 mb-0">{{ item.vars.data.product.name }}</h5>
+                                        <small>{{ item.vars.data.product.description[:150] }}...</small>
+                                        <div class="form-inline mt-2">
+                                            <div class="form-group mb-0 mr-2">
+                                                {{ form_widget(item.quantity, {
+                                                    'attr': {
+                                                        'class': 'form-control form-control-sm ' ~ (item.quantity.vars.valid and item.vars.data.quantity > 0 ? '' : 'is-invalid')
+                                                    }
+                                                }) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(item.quantity) }}
+                                                </div>
+                                            </div>
+                                            {{ form_widget(item.remove, {'attr': {'class': 'btn btn-dark btn-sm'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="flex-fill mr-2 text-right">
+                                        <b>{{ item.vars.data.product.price }} $</b>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div><b>Total</b></div>
+                                <span><b>{{ cart.total }} $</b></span>
+                            </li>
+                        </ul>
+                    </div>
+                    {{ form_end(form, {'render_rest': false}) }}
+                    <div class="align-items-center d-flex justify-content-center mt-2">
+                        <a href="#" class="btn btn-secondary text-white">Checkout</a>
+                    </div>
+                </div>
+                <div class="col-1">
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                Your cart is empty. Go to the <a href="{{ path('home') }}">product list</a>.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
