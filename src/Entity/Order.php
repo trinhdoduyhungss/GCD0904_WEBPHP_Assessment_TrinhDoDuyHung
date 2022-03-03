@@ -17,6 +17,7 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity=UserInfo::class, mappedBy="userid", cascade={"persist", "remove"})
      */
     private $id;
 
@@ -63,7 +64,7 @@ class Order
     public function getItems(): Collection
     {
         return $this->items;
-    }
+    }    
 
     public function addItem(OrderItem $item): self
     {

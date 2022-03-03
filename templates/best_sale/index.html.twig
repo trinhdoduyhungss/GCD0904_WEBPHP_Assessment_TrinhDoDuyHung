@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Best Sale{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">{{ product.description }}</p>
-                        <p class="card-text">Ordered: {{ quantity[product.id] }}</p>
+                        <p class="card-text"><b>Ordered: </b>{{ quantity[product.id] }}</p>
                         <div class="d-flex justify-content-between align-item-center">
                             <span class="h5 mt-auto">{{ product.price }} $</span>
                             <a href="{{ path('product.detail', {id: product.id}) }}" class="btn btn-dark">Buy</a>

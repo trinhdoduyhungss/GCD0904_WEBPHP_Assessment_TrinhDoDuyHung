@@ -28,7 +28,7 @@ class CartManager
         $this->cartSessionStorage = $cartStorage;
         $this->entityManager = $entityManager;
     }
-
+    
     /**
      * Create an order from the cart.
      */
@@ -38,10 +38,10 @@ class CartManager
         $order
             ->setStatus(Order::STATUS_CART)
             ->setCreatedAt(new \DateTime())
-            ->setUpdatedAt(new \DateTime());
-
+            ->setUpdatedAt(new \DateTime());   
         return $order;
     }
+
 
     /**
      * Gets the current cart.

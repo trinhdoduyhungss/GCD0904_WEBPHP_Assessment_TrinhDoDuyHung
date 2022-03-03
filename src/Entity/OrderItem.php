@@ -8,16 +8,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=OrderItemRepository::class)
+ * @ORM\Table(name="`order_item`")
  */
 class OrderItem
 {
-    // /**
-    //  * @ORM\Id
-    //  * @ORM\GeneratedValue
-    //  * @ORM\Column(type="integer")
-    //  */
-    // private $id;
-
     /**
      * @ORM\Id @ORM\ManyToOne(targetEntity=Product::class)
      * @ORM\JoinColumn(nullable=false)
@@ -36,11 +30,6 @@ class OrderItem
      * @ORM\JoinColumn(nullable=false)
      */
     private $orderRef;
-
-    // public function getId(): ?int
-    // {
-    //     return $this->id;
-    // }
 
     public function getProduct(): ?Product
     {
