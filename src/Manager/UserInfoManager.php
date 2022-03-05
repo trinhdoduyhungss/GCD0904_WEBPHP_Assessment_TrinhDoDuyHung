@@ -43,12 +43,16 @@ class UserInfoManager
         return $userInfo;
     }
 
-    // /**
-    //  * Persists the user info in database.
-    //  */
-    // public function save(UserInfo $userInfo): void
-    // {
-    //     $this->entityManager->persist($userInfo);
-    //     $this->entityManager->flush();
-    // }
+    /**
+     * Persists the user info in database.
+     */
+    public function save(UserInfo $userInfo): void
+    {
+        if($userInfo->getUsername() == 'Guest' || $userInfo->getUsername() == 'Anonymous'){
+            return;
+        }else{
+            $this->entityManager->persist($userInfo);
+            $this->entityManager->flush();
+        }
+    }
 }

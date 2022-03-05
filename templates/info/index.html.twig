@@ -1,20 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InfoController!{% endblock %}
+{% block title %}Your Information{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'F:/Lab/PHP_lab/LaptopShop/src/Controller/InfoController.php'|file_link(0) }}">src/Controller/InfoController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'F:/Lab/PHP_lab/LaptopShop/templates/info/index.html.twig'|file_link(0) }}">templates/info/index.html.twig</a></code></li>
-    </ul>
+<div class="container mt-4">
+    <div class="row mt-4">
+        <div class="col-1">
+        </div>
+        <div class="col-md-10 w-100">
+            {{ form_start(form) }}
+                <div class="card card-block d-flex">
+                    <div class="card-header bg-dark text-white d-flex">
+                        <h5>Your Information</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex">
+                            <div class="flex-fill mr-2 mt-2">
+                                <img src="https://via.placeholder.com/200x200" width="64" alt="Product image">
+                            </div>
+                            <div class="flex-fill mr-2">
+                                <div class="form-inline mt-2">
+                                    <div class="form-group mb-0 mr-2">
+                                        {{ form_widget(form.username, {
+                                            'attr': {
+                                                'class': 'form-text text-muted form-control-sm' ~ (form.username.vars.valid and form.username.vars.value > 0 ? '' : 'is-invalid')
+                                            }
+                                        }) }}
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(form.username) }}
+                                    </div>
+                                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-secondary text-white'}}) }}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                {{ form_end(form, {'render_rest': false}) }}
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
 </div>
 {% endblock %}
