@@ -35,8 +35,12 @@
                 <li class="nav-item">
                     <a class="nav-link" style="font-size:15px;" href="#">Pricing</a>
                 </li>
+                {% if app.request.get('_route') == 'contact_us' %}
+                <li class="nav-item active">
+                {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" style="font-size:15px;" href="#">Contact us</a>
+                {% endif %}
+                    <a class="nav-link" style="font-size:15px;" href="{{ path('contact_us') }}">Contact us{% if app.request.get('_route') == 'best_sale' %}<span class="sr-only">(current)</span>{% endif %}</a>
                 </li>
             </ul>
             <a class="navbar-text" href="#" style="font-size:15px; margin-right:1%">
