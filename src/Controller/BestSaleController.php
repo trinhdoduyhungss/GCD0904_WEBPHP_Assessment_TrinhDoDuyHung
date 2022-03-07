@@ -30,7 +30,7 @@ class BestSaleController extends AbstractController
                 }
             }
         }
-        // Sort the array by quantity
+        // Sort the array by quantity from highest to lowest
         arsort($totalQuantity);
         // Get the top 10 products and its quantity
         $top10Products = [];
@@ -38,15 +38,12 @@ class BestSaleController extends AbstractController
         $i = 0;
         foreach ($totalQuantity as $key => $value) {
             if ($i < 10) {
-                $top10Products[$key] = $value;
-                $topQuantity[$key] = $value;
+                $productName = $productRepository->find($key)->getName();
+                $top10Products[$productName] = $productRepository->find($key);
+                $topQuantity[$productName] = $value;
                 $i++;
             }
         }
-        // Retrieve the products from the top 10 products by id in product repository
-        $top10Products = $productRepository->findBy(['id' => array_keys($top10Products)]);
-        // Reverse $top10Products
-        $top10Products = array_reverse($top10Products);
         // Cart manager
         $cart = $cartManager->getCurrentCart();
         if($cart->getId()){
