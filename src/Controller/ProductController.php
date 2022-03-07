@@ -35,7 +35,10 @@ class ProductController extends AbstractController
                 ->setUpdatedAt(new \DateTime());
 
             $cartManager->save($cart);
-            $userInfoManager->createUserInfo($cart);
+            $userName = $userInfoRepository->findOneBy(['userid' => $cart->getId()]);
+            if ($userName->getUsername() == null) {
+                $userInfoManager->createUserInfo($cart);
+            }
             return $this->redirectToRoute('product.detail', ['id' => $product->getId()]);
         }else{
             $cart = $cartManager->getCurrentCart();
